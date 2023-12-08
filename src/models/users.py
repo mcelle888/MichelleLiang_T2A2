@@ -5,7 +5,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     f_name = db.Column(db.String(), nullable = False)
-    phone = db.Column(db.Integer(), nullable = True)
+    phone = db.Column(db.String(), nullable = True)
     email = db.Column(db.String(), nullable = False, unique=True)
     password = db.Column(db.String(), nullable = False)
     admin = db.Column(db.Boolean(), default=False)
