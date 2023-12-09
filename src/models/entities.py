@@ -7,4 +7,8 @@ class Entity(db.Model):
     name = db.Column(db.String())
     type = db.Column(db.String())
     description = db.Column(db.String())
+    events = db.relationship(
+        "Event",
+        back_populates="entities"
+    )
  
