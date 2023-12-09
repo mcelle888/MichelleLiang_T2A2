@@ -5,7 +5,7 @@ from marshmallow.validate import Length
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        fields = ("email", "name", "password", "admin")  
+        fields = ("email", "name", "password", "admin", "phone")  
         password = ma.String(validate=Length(min=5))
 
 user_schema = UserSchema()
