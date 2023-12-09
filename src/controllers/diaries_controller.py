@@ -83,3 +83,31 @@ def update_diary(id):
 
     db.session.commit()
     return jsonify(diary_schema.dump(diary))
+
+
+# Route method to delete a diary entry
+
+@diaries.route("/<int:id>/", methods=["DELETE"])
+@jwt_required()
+def delete_diary(id):
+    user_id = get_jwt_identity()
+
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt)
+    if not user:
+        return abort(401, description="Invalid user")
+
+    stmt = db.select(Diary).filter_by(id=id)
+    diary = db.session.scalar(stmt)
+
+    if not diary:
+        return abort(400, description= "Diary doesn't exist")
+    
+    if diary.user_id != user.id and not user.admin:
+        return abort(401, description="Unauthorised User")
+        
+    
+
+    db.session.delete(diary)
+    db.session.commit()
+    return jsonify(diary_schema.dump(diary))
