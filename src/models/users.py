@@ -14,3 +14,8 @@ class User(db.Model):
         back_populates="user",
         cascade="all, delete"
     )
+    meetings = db.relationship(
+        "Meeting",
+        back_populates="user",
+        cascade="all, delete"
+    )
