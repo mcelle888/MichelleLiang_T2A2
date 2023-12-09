@@ -59,7 +59,7 @@ def update_diary(id):
 
     user_id = get_jwt_identity()
 
-    stmt = db.select(Diary).filter_by(user_id=user_id)
+    stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
 
     if not user:
@@ -78,7 +78,7 @@ def update_diary(id):
     diary.date = date.today()
 
     # Diary can only be updated by author
-    if diary.user_id != user.id:
+    if diary.user_id != user.id and not user.admin:
         return abort(401, description="Unauthorised User")
 
     db.session.commit()

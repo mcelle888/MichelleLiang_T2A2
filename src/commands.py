@@ -21,14 +21,14 @@ def create_db():
 def seed_db():
 
 # Creating users to seed the database
-    admin_user = User(
+    user0 = User(
         email = "admin@email.com",
         name = "Admin",
         password = bcrypt.generate_password_hash("password123").decode("utf-8"),
         admin = True,
         phone = 61429928942
     )
-    db.session.add(admin_user)
+    db.session.add(user0)
 
     user1 = User(
         email = "jess@email.com",
@@ -93,7 +93,7 @@ def seed_db():
         date = Timestamp('2022-05-08'),
         time = "12pm",
         location = "Melbourne",
-        user_id = user1.id
+        leader_id = user0.id
     )
     db.session.add(meeting1)
 
@@ -103,7 +103,7 @@ def seed_db():
         date = Timestamp('2023-12-29'),
         time = "11pm",
         location = "Melbourne",
-        user_id = user2.id
+        leader_id = user1.id
     )
     db.session.add(meeting2)
     
@@ -166,6 +166,7 @@ def seed_db():
         entity_id = 5 
     )
     db.session.add(event2)
+
 
     # Seeding
     db.session.commit()

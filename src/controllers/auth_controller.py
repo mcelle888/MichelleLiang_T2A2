@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, abort
 from main import db
 from models.users import User
-from schemas.user_schema import user_schema, users_schema
+from schemas.user_schema import user_schema
 from datetime import timedelta
 from main import bcrypt
 from flask_jwt_extended import create_access_token
