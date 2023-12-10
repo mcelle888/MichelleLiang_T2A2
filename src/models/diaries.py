@@ -1,4 +1,4 @@
-from main import db, ma
+from setup import db, ma
 
 class Diary(db.Model):
     __tablename__= "diaries"
@@ -8,10 +8,10 @@ class Diary(db.Model):
     description = db.Column(db.String())
     date = db.Column(db.Date())
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    user = db.relationship(
-        "User",
-        back_populates="diaries"
-    )
+    # user = db.relationship(
+    #     "User",
+    #     back_populates="diaries"
+    # )
 
 # Schema
 class DiarySchema(ma.Schema):

@@ -1,5 +1,4 @@
-from main import db, ma
-from models.users import User
+from setup import db, ma
 from marshmallow.validate import Length
 
 class User(db.Model):
@@ -11,16 +10,16 @@ class User(db.Model):
     email = db.Column(db.String(), nullable = False, unique=True)
     password = db.Column(db.String(), nullable = False)
     admin = db.Column(db.Boolean(), default=False)
-    diaries = db.relationship(
-        "Diary",
-        back_populates="user",
-        cascade="all, delete"
-    )
-    meetings = db.relationship(
-        "Meeting",
-        back_populates="user",
-        cascade="all, delete"
-    )
+    # diaries = db.relationship(
+    #     "Diary",
+    #     back_populates="user",
+    #     cascade="all, delete"
+    # )
+    # meetings = db.relationship(
+    #     "Meeting",
+    #     back_populates="user",
+    #     cascade="all, delete"
+    # )
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):

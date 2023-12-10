@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, abort
-from main import db
+from setup import db
 from models.meetings import Meeting, meeting_schema, meetings_schema
 from models.users import User
 from flask_jwt_extended import jwt_required, get_jwt_identity

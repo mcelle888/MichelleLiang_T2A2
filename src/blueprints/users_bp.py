@@ -4,10 +4,10 @@ from models.users import User, user_schema
 from datetime import timedelta
 from flask_jwt_extended import create_access_token
 
-auth = Blueprint('auth', __name__, url_prefix="/auth")
+auth_bp = Blueprint('auth', __name__, url_prefix="/auth")
 
 # Route to sign up: /auth/signup
-@auth.route("/signup", methods=["POST"])
+@auth_bp.route("/signup", methods=["POST"])
 def auth_register():
     user_fields = user_schema.load(request.json)
     stmt = db.select(User).filter_by(email=user_fields["email"])
@@ -26,7 +26,7 @@ def auth_register():
     access_token = create_access_token(identity=str(user.id), expires_delta=expiry)
     return jsonify({"user_email":user.email, "name": user.name, "phone": user.phone, "token": access_token })
 
-@auth.route("/signin", methods=["POST"])
+@auth_bp.route("/signin", methods=["POST"])
 def auth_signin():
     user_fields = user_schema.load(request.json)
     stmt = db.select(User).filter_by(email=user_fields["email"])

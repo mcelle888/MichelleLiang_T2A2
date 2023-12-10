@@ -1,4 +1,4 @@
-from main import db, ma
+from setup import db, ma
 
 class Event(db.Model):
     __tablename__= "events"

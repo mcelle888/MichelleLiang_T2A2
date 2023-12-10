@@ -1,4 +1,4 @@
-from main import db, ma
+from setup import db, ma
 # from marshmallow import fields
 # from marshmallow.validate import OneOf, Regexp, Length, And
 
@@ -12,10 +12,10 @@ class Meeting(db.Model):
     time = db.Column(db.String())
     location = db.Column(db.String())
     leader_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    user = db.relationship(
-        "User",
-        back_populates="meetings"
-    )
+    # user = db.relationship(
+    #     "User",
+    #     back_populates="meetings"
+    # )
 
 class MeetingSchema(ma.Schema):
     class Meta:

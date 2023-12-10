@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, abort
-from main import db
+from setup import db
 from models.diaries import Diary, diary_schema, diaries_schema
 from models.users import User
 from datetime import date
