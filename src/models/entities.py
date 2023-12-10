@@ -7,6 +7,9 @@ class Entity(db.Model):
     name = db.Column(db.String())
     type = db.Column(db.String())
     description = db.Column(db.String())
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
     events = db.relationship(
         "Event",
         back_populates="entities"
@@ -15,7 +18,7 @@ class Entity(db.Model):
 # Schema
 class EntitySchema(ma.Schema):
     class Meta:
-        fields = ("id", "name", "type", "description")
+        fields = ("id", "name", "type", "description", "user_id")
 
 entity_schema = EntitySchema()
 

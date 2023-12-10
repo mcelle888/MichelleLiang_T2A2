@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request, abort
 from setup import db
-from models.entities import Entity, entity_schema, entities_schema
-from models.users import User
+from models.entities import Entity, entities_schema, entity_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from authorise import authorise
 
 
 entities_bp = Blueprint('entities', __name__, url_prefix="/entities")
@@ -34,19 +34,24 @@ def search_entities():
 
 # Route to post a new entity (for admins only)
 
-# @entities_bp.route("/", methods=["POST"])
-# @jwt_required()
-# def create_diary():
+@entities_bp.route("/", methods=["POST"])
+@jwt_required()
+def create_entity():
 
-#     diary_fields = diary_schema.load(request.json)
+    entity_fields = entity_schema.load(request.json)
 
-#     user_id = get_jwt_identity()
-#     new_diary = Diary()
-#     new_diary.title = diary_fields["title"]
-#     new_diary.description = diary_fields["description"]
-#     new_diary.date = date.today()
-#     new_diary.user_id = user_id
-#     db.session.add(new_diary)
-#     db.session.commit()
- 
-#     return jsonify(diary_schema.dump(new_diary))
+    user_id = get_jwt_identity() 
+    new_entity = Entity()
+    new_entity.name = entity_fields["name"]
+    new_entity.description = entity_fields["description"]
+    new_entity.type = entity_fields["type"]
+    new_entity.user_id = user_id
+
+    if new_entity:
+        authorise()
+
+        db.session.add(new_entity)
+        db.session.commit()
+        return jsonify(entity_schema.dump(new_entity))
+    else:
+        return {'error': "Unauthorised Access" }
