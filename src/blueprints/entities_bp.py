@@ -29,11 +29,9 @@ def search_entities():
         entity_list = db.session.scalars(stmt)
 
     result = entities_schema.dump(entity_list)
-    # return the data in JSON format
     return jsonify(result)
 
-# Route to post a new entity (for admins only)
-
+# Route to post a new entity (admin only)
 @entities_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_entity():
@@ -56,7 +54,7 @@ def create_entity():
     else:
         return {'Error': "Unauthorised Access" }
     
-
+# Route to update a specific entity (admin only)
 @entities_bp.route("/<int:id>/", methods=["PUT"])
 @jwt_required()
 def update_entity(id):
@@ -72,13 +70,12 @@ def update_entity(id):
     entity.description = entity_fields["description"]
     entity.type = entity_fields["type"]
 
-    # Entity can only be updated by author
     if entity:
         authorise()
         db.session.commit()
         return jsonify(entity_schema.dump(entity))
     
-
+# Route to delete an entity (admin only)
 @entities_bp.route("/<int:id>/", methods=["DELETE"])
 @jwt_required()
 def delete_entity(id):
