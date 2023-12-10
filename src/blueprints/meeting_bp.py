@@ -1,15 +1,16 @@
 from flask import Blueprint, jsonify, request, abort
 from main import db
-from models.meetings import Meeting
+from models.meetings import Meeting, meeting_schema, meetings_schema
 from models.users import User
-from schemas.meeting_schema import meeting_schema, meetings_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
-meetings = Blueprint('meetings', __name__, url_prefix="/meetings")
+meetings_bp = Blueprint('meetings', __name__, url_prefix="/meetings")
+
+
 
 # Route for getting a list of all the meetings: /meetings>
-@meetings.route("/", methods=["GET"])
+@meetings_bp.route("/", methods=["GET"])
 @jwt_required()
 def get_meeting():
     stmt = db.select(Meeting)
@@ -19,7 +20,7 @@ def get_meeting():
     return jsonify(result)
 
 # Route for details about the a specific meeting
-@meetings.route("/<int:id>/", methods=["GET"])
+@meetings_bp.route("/<int:id>/", methods=["GET"])
 @jwt_required()
 def get_one_meeting(id):
     stmt = db.select(Meeting).filter_by(id=id)
@@ -30,7 +31,7 @@ def get_one_meeting(id):
     return jsonify(result)
 
 # Route to edit a specific meeting
-@meetings.route("/<int:id>/", methods=["PUT"])
+@meetings_bp.route("/<int:id>/", methods=["PUT"])
 @jwt_required()
 
 def update_one_meeting(id):

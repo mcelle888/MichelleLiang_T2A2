@@ -1,4 +1,6 @@
-from main import db
+from main import db, ma
+from models.users import User
+from marshmallow.validate import Length
 
 class User(db.Model):
     __tablename__ = "users"
@@ -19,3 +21,13 @@ class User(db.Model):
         back_populates="user",
         cascade="all, delete"
     )
+
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        fields = ("email", "name", "password", "admin", "phone")  
+        password = ma.String(validate=Length(min=5, error = "Password must be at least 5 characters"))
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)

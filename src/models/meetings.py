@@ -1,4 +1,6 @@
-from main import db
+from main import db, ma
+# from marshmallow import fields
+# from marshmallow.validate import OneOf, Regexp, Length, And
 
 class Meeting(db.Model):
     __tablename__= "meetings"
@@ -14,4 +16,12 @@ class Meeting(db.Model):
         "User",
         back_populates="meetings"
     )
+
+class MeetingSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "title", "description", "date", "time", "location", "leader_id")
+
+meeting_schema = MeetingSchema()
+
+meetings_schema = MeetingSchema(many=True)
 

@@ -1,4 +1,4 @@
-from main import db
+from main import db, ma
 
 class Diary(db.Model):
     __tablename__= "diaries"
@@ -12,3 +12,12 @@ class Diary(db.Model):
         "User",
         back_populates="diaries"
     )
+
+# Schema
+class DiarySchema(ma.Schema):
+    class Meta:
+        fields = ("id", "title", "description", "date", "user_id")
+
+diary_schema = DiarySchema()
+
+diaries_schema = DiarySchema(many=True)

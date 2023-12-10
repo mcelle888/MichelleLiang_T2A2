@@ -1,3 +1,4 @@
-FLASK_APP = main
-FLASK_ENV = development
-FLASK_DEBUG = True
+FLASK_RUN_PORT = # Server port 
+FLASK_DEBUG = # Set True for debug mode
+DB_URI = # Database connection
+JWT_KEY = JWT signing key

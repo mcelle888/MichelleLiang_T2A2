@@ -1,4 +1,4 @@
-from main import db
+from main import db, ma
 
 class Entity(db.Model):
     __tablename__= "entities"
@@ -11,4 +11,12 @@ class Entity(db.Model):
         "Event",
         back_populates="entities"
     )
- 
+
+# Schema
+class EntitySchema(ma.Schema):
+    class Meta:
+        fields = ("id", "name", "type", "description")
+
+entity_schema = EntitySchema()
+
+entities_schema = EntitySchema(many=True)
