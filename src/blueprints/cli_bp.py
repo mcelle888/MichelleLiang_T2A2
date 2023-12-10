@@ -160,7 +160,8 @@ def seed_db():
         name = "Mercury",
         description = "Viewable towards the Eastern horizon, in the early hours of dawn, an hour before the sun rises on the horizon. Greatest elongation will occur on the 13th where it will rise 90 minutes before the sun ",
         month = "January",
-        entity_id = 1 
+        entity_id = 1,
+        user_id = user1.id 
     )
     db.session.add(event1)
 
@@ -169,7 +170,8 @@ def seed_db():
         name = "Betelgeuse",
         description = "April will be the brightest month to see this star",
         month = "April",
-        entity_id = 5 
+        entity_id = 5,
+        user_id = user1.id
     )
     db.session.add(event2)
 

@@ -8,6 +8,8 @@ class Event(db.Model):
     description = db.Column(db.String())
     month = db.Column(db.String())
     entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     entities = db.relationship(
         "Entity",
         back_populates="events"

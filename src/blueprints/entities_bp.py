@@ -54,4 +54,44 @@ def create_entity():
         db.session.commit()
         return jsonify(entity_schema.dump(new_entity))
     else:
-        return {'error': "Unauthorised Access" }
+        return {'Error': "Unauthorised Access" }
+    
+
+@entities_bp.route("/<int:id>/", methods=["PUT"])
+@jwt_required()
+def update_entity(id):
+    entity_fields = entity_schema.load(request.json)
+
+    stmt = db.select(Entity).filter_by(id=id)
+    entity = db.session.scalar(stmt)
+
+    if not entity:
+        return abort(400, description= "Entity does not exist")
+
+    entity.name = entity_fields["name"]
+    entity.description = entity_fields["description"]
+    entity.type = entity_fields["type"]
+
+    # Entity can only be updated by author
+    if entity:
+        authorise()
+        db.session.commit()
+        return jsonify(entity_schema.dump(entity))
+    
+
+@entities_bp.route("/<int:id>/", methods=["DELETE"])
+@jwt_required()
+def delete_entity(id):
+
+    stmt = db.select(Entity).filter_by(id=id)
+    entity = db.session.scalar(stmt)
+
+    if not entity:
+        return abort(400, description= "Entity doesn't exist")
+
+    if entity:
+        authorise()    
+    
+        db.session.delete(entity)
+        db.session.commit()
+        return jsonify(entity_schema.dump(entity))
