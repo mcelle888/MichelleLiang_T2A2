@@ -156,6 +156,7 @@ def seed_db():
     )
     db.session.add(entity5)
 
+# Creating events for seeding
     event1 = Event(
         name = "Mercury",
         description = "Viewable towards the Eastern horizon, in the early hours of dawn, an hour before the sun rises on the horizon. Greatest elongation will occur on the 13th where it will rise 90 minutes before the sun ",

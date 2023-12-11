@@ -36,4 +36,5 @@ def auth_signin():
     expiry = timedelta(days=1)
     access_token = create_access_token(identity=str(user.id), expires_delta=expiry)
     return jsonify({"user":user.email, "token": access_token })
-    
+
+

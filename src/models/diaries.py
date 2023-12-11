@@ -1,4 +1,5 @@
 from setup import db, ma
+from marshmallow import fields
 
 class Diary(db.Model):
     __tablename__= "diaries"
@@ -7,16 +8,18 @@ class Diary(db.Model):
     title = db.Column(db.String())
     description = db.Column(db.String())
     date = db.Column(db.Date())
+
+    # Foreign key to establish relationship with users
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    # user = db.relationship(
-    #     "User",
-    #     back_populates="diaries"
-    # )
+    # SQLAlchemy relatinship which nests an instance of a user model in diary
+    user = db.relationship("User", back_populates="diaries")
 
 # Schema
 class DiarySchema(ma.Schema):
+    
+    user = fields.Nested('UserSchema', exclude = ['password', 'phone' ])
     class Meta:
-        fields = ("id", "title", "description", "date", "user_id")
+        fields = ("id", "title", "description", "date", "user_id", "user")
 
 diary_schema = DiarySchema()
 

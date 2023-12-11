@@ -19,17 +19,26 @@ def get_diary(id):
     result = diary_schema.dump(diary)
     return jsonify(result)
 
-# Route for getting diary entries from a particular user /diaries/user
-@diaries_bp.route("/user", methods = ["GET"])
-@jwt_required()
-def get_user_diary(): 
-    user_id = get_jwt_identity()
+# Route to retrieve diaries for a given user
 
-    stmt = db.select(Diary).filter_by(user_id = user_id)
-    diaries = db.session.scalars(stmt)
+@diaries_bp.route("/users/<int:id>", methods=["GET"])
+def user_diaries(id):
+    stmt = db.select(User).filter_by(id=id)
+    user = db.session.scalar(stmt)
+    if not user:
+        return abort(400, description = "User not found")
 
-    result = diaries_schema.dump(diaries)
-    return jsonify(result)
+    stmt = db.select(Diary).filter_by(user_id=id)
+    diary = db.session.scalar(stmt)
+    if not diary:
+        return abort(400, description= "No diary entries found for this user")
+
+    result = diary_schema.dump(diary)
+    return jsonify(result)   
+
+
+
+
 
 # Route to post diary entry /
 

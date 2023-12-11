@@ -10,11 +10,11 @@ class User(db.Model):
     email = db.Column(db.String(), nullable = False, unique=True)
     password = db.Column(db.String(), nullable = False)
     admin = db.Column(db.Boolean(), default=False)
-    # diaries = db.relationship(
-    #     "Diary",
-    #     back_populates="user",
-    #     cascade="all, delete"
-    # )
+
+    # SQL Alchemy relationship 
+    diaries = db.relationship("Diary", back_populates="user", cascade="all, delete")
+
+
     # meetings = db.relationship(
     #     "Meeting",
     #     back_populates="user",
@@ -22,7 +22,7 @@ class User(db.Model):
     # )
 
 
-class UserSchema(ma.SQLAlchemyAutoSchema):
+class UserSchema(ma.Schema):
     class Meta:
         model = User
         fields = ("email", "name", "password", "admin", "phone")  
