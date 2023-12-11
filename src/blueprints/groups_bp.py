@@ -17,7 +17,7 @@ def get_group():
     result = groups_schema.dump(groups)
     return jsonify(result)
 
-# Get a specific groups list
+# Get a list of members of a specific group meeting
 
 @groups_bp.route("/<int:id>/", methods=["GET"])
 @jwt_required()
@@ -30,3 +30,20 @@ def get_one_group(id):
     
     result = groups_schema.dump(groups)
     return jsonify(result)
+
+
+# Route to allow user to add themselves to a group meeting
+@groups_bp.route("/", methods=["POST"])
+@jwt_required()
+def create_group():
+
+    group_fields = group_schema.load(request.json)
+
+    user_id = get_jwt_identity()
+    new_group = Group()
+    new_group.meeting_id = group_fields["meeting_id"]
+    new_group.user_id = user_id
+    db.session.add(new_group)
+    db.session.commit()
+
+    return jsonify(group_schema.dump(new_group))
