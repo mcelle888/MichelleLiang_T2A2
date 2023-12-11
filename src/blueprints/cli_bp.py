@@ -5,18 +5,19 @@ from models.users import User
 from models.meetings import Meeting
 from models.entities import Entity
 from models.events import Event
+from models.groups import Group
 from datetime import date
 from pandas import Timestamp
 
 db_commands = Blueprint('db', __name__)
 
 # To create tables
-@db_commands .cli.command("create")
+@db_commands.cli.command("create")
 def create_db():
     db.create_all()
     print("Tables created")
 
-@db_commands .cli.command("seed")
+@db_commands.cli.command("seed")
 def seed_db():
 
 # Creating users to seed the database
@@ -106,7 +107,7 @@ def seed_db():
         leader_id = user1.id
     )
     db.session.add(meeting2)
-    
+    db.session.commit()
     # Creating celestial entity entries for seeding
     entity1 = Entity(
         name = "Mercury",
@@ -176,12 +177,30 @@ def seed_db():
     )
     db.session.add(event2)
 
+    group1 = Group(
+        user_id = 1,
+        meeting_id = 1
+    )
+    db.session.add(group1)
+
+    group2 = Group (
+        user_id = 2,
+        meeting_id = 1
+    )
+    db.session.add(group2)
+
+    group3 = Group (
+        user_id = 1,
+        meeting_id = 2
+    )
+    db.session.add(group3)
+    
 
     # Seeding
     db.session.commit()
     print("Table seeded")
 
-@db_commands .cli.command("drop")
+@db_commands.cli.command("drop")
 def drop_db():
     db.drop_all()
     print("Tables dropped")

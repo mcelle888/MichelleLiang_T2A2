@@ -10,10 +10,6 @@ class Event(db.Model):
     entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    entities = db.relationship(
-        "Entity",
-        back_populates="events"
-    )
 
 
 class EventSchema(ma.Schema):

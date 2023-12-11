@@ -10,11 +10,6 @@ class Entity(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    events = db.relationship(
-        "Event",
-        back_populates="entities"
-    )
-
 # Schema
 class EntitySchema(ma.Schema):
     class Meta:

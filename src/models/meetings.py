@@ -11,11 +11,9 @@ class Meeting(db.Model):
     date = db.Column(db.Date())
     time = db.Column(db.String())
     location = db.Column(db.String())
+
     leader_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    # user = db.relationship(
-    #     "User",
-    #     back_populates="meetings"
-    # )
+    user = db.relationship("User", back_populates="meetings")
 
 class MeetingSchema(ma.Schema):
     class Meta:
@@ -23,5 +21,5 @@ class MeetingSchema(ma.Schema):
 
 meeting_schema = MeetingSchema()
 
-meetings_schema = MeetingSchema(many=True)
+meetings_schema = MeetingSchema(many = True)
 
