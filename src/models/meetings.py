@@ -1,5 +1,5 @@
 from setup import db, ma
-# from marshmallow import fields
+from marshmallow import fields
 # from marshmallow.validate import OneOf, Regexp, Length, And
 
 class Meeting(db.Model):
@@ -14,10 +14,13 @@ class Meeting(db.Model):
 
     leader_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
+    groups = db.relationship("Group",back_populates="meetings",cascade="all, delete")
+
 
 class MeetingSchema(ma.Schema):
+    groups = fields.Nested('GroupSchema')
     class Meta:
-        fields = ("id", "title", "description", "date", "time", "location", "leader_id")
+        fields = ("id", "title", "description", "date", "time", "location", "leader_id", "groups_id")
 
 meeting_schema = MeetingSchema()
 

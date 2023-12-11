@@ -10,10 +10,12 @@ class Group(db.Model):
     meeting_id = db.Column(db.Integer, db.ForeignKey("meetings.id"), nullable=False)
 
     user = db.relationship("User", back_populates="groups")
+    meetings = db.relationship("Meeting",back_populates="groups",cascade="all, delete")
+
 
 class GroupSchema(ma.Schema):
     user = fields.Nested('UserSchema', exclude = ['password','admin'])
-    meetings = db.relationship("Meeting",back_populates="group",cascade="all, delete")
+
 
     class Meta:
         fields = ("user_id", "meeting_id", "user")
