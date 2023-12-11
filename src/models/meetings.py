@@ -13,7 +13,7 @@ class Meeting(db.Model):
     location = db.Column(db.String())
 
     leader_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    user = db.relationship("User", back_populates="meetings")
+
 
 class MeetingSchema(ma.Schema):
     class Meta:

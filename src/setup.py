@@ -14,14 +14,14 @@ app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = environ.get('DB_URI')
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, session_options={"expire_on_commit": False})
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-@app.errorhandler(401)
-def unauthorized(err):
-    return {'error': 'Unauthorised Access'}
+# @app.errorhandler(401)
+# def unauthorized(err):
+#     return {'error': 'Unauthorised Access'}
 
 @app.errorhandler(ValidationError)
 def validation_error(err):

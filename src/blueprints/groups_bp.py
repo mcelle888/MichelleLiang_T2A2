@@ -47,3 +47,31 @@ def create_group():
     db.session.commit()
 
     return jsonify(group_schema.dump(new_group))
+
+#  Route to allow user to remove themselves from a group meeting
+
+@groups_bp.route("/<int:id>/", methods=["DELETE"])
+@jwt_required()
+def delete_group(id):
+
+    user_id = get_jwt_identity()
+
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt) 
+    if not user:
+        return abort(401, description="Invalid user")
+        
+    stmt = db.select(Group).filter_by(id=id)
+    group = db.session.scalar(stmt)
+
+    if not group:
+        return abort(400, description= "Group doesn't exist")
+    
+    if group.user_id != user.id and not user.admin:
+        return abort(401, description="Unauthorised User")
+    
+    
+    db.session.delete(group)
+    db.session.commit()
+    return jsonify(group_schema.dump(group))
+
