@@ -17,7 +17,7 @@ class Diary(db.Model):
 # Schema
 class DiarySchema(ma.Schema):
     
-    user = fields.Nested('UserSchema', exclude = ['password', 'phone' ])
+    user = fields.Nested('UserSchema', exclude = ['password', 'phone', 'admin'])
     class Meta:
         fields = ("id", "title", "description", "date", "user_id", "user")
 

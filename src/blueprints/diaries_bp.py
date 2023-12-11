@@ -4,7 +4,7 @@ from models.diaries import Diary, diary_schema, diaries_schema
 from models.users import User
 from datetime import date
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+ 
 
 diaries_bp = Blueprint('diaries', __name__, url_prefix="/diaries")
 
@@ -22,11 +22,22 @@ def get_diary(id):
 # Route to retrieve diaries for a given user
 
 @diaries_bp.route("/users/<int:id>", methods=["GET"])
+@jwt_required()
 def user_diaries(id):
     stmt = db.select(User).filter_by(id=id)
-    user = db.session.scalar(stmt)
-    if not user:
+    user1 = db.session.scalar(stmt)
+
+    if not user1:
         return abort(400, description = "User not found")
+    
+    # Authorisation: only allows users to access their own diaries
+    jwt_user_id = get_jwt_identity()
+    stmt = db.select(User).filter_by(id=jwt_user_id)
+    user = db.session.scalar(stmt)
+    if user != user1:
+        abort(401)
+
+    
 
     stmt = db.select(Diary).filter_by(user_id=id)
     diary = db.session.scalar(stmt)
@@ -35,7 +46,6 @@ def user_diaries(id):
 
     result = diary_schema.dump(diary)
     return jsonify(result)   
-
 
 
 
