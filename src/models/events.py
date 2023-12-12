@@ -1,4 +1,8 @@
 from setup import db, ma
+from marshmallow import fields
+from marshmallow.validate import OneOf
+
+VALID_MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
 
 class Event(db.Model):
     __tablename__= "events"
@@ -13,6 +17,9 @@ class Event(db.Model):
 
 
 class EventSchema(ma.Schema):
+    month = fields.String(validate=OneOf(VALID_MONTHS))
+
+    
     class Meta:
         fields = ("id", "name", "description", "month", "entity_id")
 

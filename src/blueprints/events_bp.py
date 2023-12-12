@@ -43,7 +43,7 @@ def create_event():
     new_event.name = event_fields["name"]
     new_event.description = event_fields["description"]
     new_event.month = event_fields["month"]
-    new_event.event_id = event_fields["event_id"]
+    new_event.entity_id = event_fields["entity_id"]
     new_event.user_id = user_id
 
     if new_event:
