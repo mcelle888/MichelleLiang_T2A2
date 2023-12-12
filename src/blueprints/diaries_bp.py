@@ -81,7 +81,7 @@ def update_diary(id):
     user = db.session.scalar(stmt)
 
     if not user:
-        return abort(401, description="Unauthorised User")
+        return abort(401)
     
 
 
@@ -97,8 +97,7 @@ def update_diary(id):
 
     # Diary can only be updated by author
     if diary.user_id != user.id and not user.admin:
-        return abort(401, description="Unauthorised User")
-
+        return abort(401)
     db.session.commit()
     return jsonify(diary_schema.dump(diary))
 
@@ -122,7 +121,7 @@ def delete_diary(id):
         return abort(400, description= "Diary doesn't exist")
     
     if diary.user_id != user.id and not user.admin:
-        return abort(401, description="Unauthorised User")
+        return abort(401)
         
     
     db.session.delete(diary)

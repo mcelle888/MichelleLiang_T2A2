@@ -11,9 +11,10 @@ class Meeting(db.Model):
     time = db.Column(db.String())
     location = db.Column(db.String())
 
-    leader_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    leader_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     groups = db.relationship("Group",back_populates="meetings",cascade="all, delete")
+    user = db.relationship("User",back_populates="meetings",cascade="all, delete")
 
 
 class MeetingSchema(ma.Schema):

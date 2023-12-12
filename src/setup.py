@@ -24,11 +24,11 @@ jwt = JWTManager(app)
 
 @app.errorhandler(401)
 def unauthorized(err):
-    return {'error': 'Unauthorised Access: You are not authorised to access this content'}
+    return {'Error': 'Unauthorised Access'}
 
 @app.errorhandler(ValidationError)
 def validation_error(err):
-    return {'error': err.messages}
+    return {'Error': err.messages}
 
 @app.errorhandler(KeyError)
 def key_error(e):
