@@ -8,6 +8,7 @@ from authorise import authorise
  
 user_bp = Blueprint('user', __name__, url_prefix="/user")
 
+
 # Route to sign up: /user/signup
 @user_bp.route("/signup", methods=["POST"])
 def user_register():

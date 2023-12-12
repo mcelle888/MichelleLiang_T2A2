@@ -34,7 +34,7 @@ def get_one_meeting(id):
 
 
 # Route to edit a specific meeting
-@meetings_bp.route("/<int:id>/", methods=["PUT"])
+@meetings_bp.route("/<int:id>/", methods=["PUT", "PATCH"])
 @jwt_required()
 
 def update_one_meeting(id):
@@ -58,6 +58,7 @@ def update_one_meeting(id):
     meeting.description = meeting_fields["description"]
     meeting.date = meeting_fields["date"]
     meeting.location = meeting_fields["location"]
+    meeting.time= meeting_fields["time"]
   
     if meeting.leader_id != user.id and not user.admin:
         return abort(401, description="Unauthorised User")
@@ -106,7 +107,6 @@ def delete_meeting(id):
         return abort(400, description= "Meeting doesn't exist")
     
     if meeting.leader_id != user.id and not user.admin:
-        # return abort(401, description="Unauthorised User")
         return abort(401)
     
     db.session.delete(meeting)

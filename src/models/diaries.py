@@ -18,10 +18,6 @@ class Diary(db.Model):
 # Schema
 class DiarySchema(ma.Schema):
     user = fields.Nested('UserSchema', exclude = ['password', 'phone', 'admin'])
-    
-    date = fields.String(required=True, validate=
-        Regexp('^(?:(?:19|20)\d\d)-(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])$|^(?:(?:19|20)\d\d)-(?:0[13-9]|1[0-2])-(?:29|30)$|^(?:(?:19|20)(?:0[48]|[2468][048]|[13579][26]))-(?:0[1-9]|1[0-2])-29$', error='Invalid date/format, please enter: yyyy-mm-dd')
-    )
 
     class Meta:
         fields = ("id", "title", "description", "date", "user_id", "user")

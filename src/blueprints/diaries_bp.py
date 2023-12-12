@@ -12,10 +12,21 @@ diaries_bp = Blueprint('diaries', __name__, url_prefix="/diaries")
 @diaries_bp.route("/<int:id>/", methods=["GET"])
 @jwt_required()
 def get_diary(id):
+    user_id = get_jwt_identity()
+
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt)
+    if not user:
+        return abort(401, description="Invalid user")
+    
     stmt = db.select(Diary).filter_by(id=id)
     diary = db.session.scalar(stmt)
     if not diary:
         return abort(400, description= "Diary not found")
+    
+    if diary.user_id != user.id and not user.admin:
+        return abort(401)
+    
     result = diary_schema.dump(diary)
     return jsonify(result)
 
@@ -70,7 +81,7 @@ def create_diary():
     return jsonify(diary_schema.dump(new_diary))
 
 # Route to update diary entry /diaries/
-@diaries_bp.route("/<int:id>/", methods=["PUT"])
+@diaries_bp.route("/<int:id>/", methods=["PUT", "PATCH"])
 @jwt_required()
 def update_diary(id):
     diary_fields = diary_schema.load(request.json)
@@ -82,8 +93,6 @@ def update_diary(id):
 
     if not user:
         return abort(401)
-    
-
 
     stmt = db.select(Diary).filter_by(id=id)
     diary = db.session.scalar(stmt)
