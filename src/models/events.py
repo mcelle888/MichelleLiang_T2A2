@@ -15,6 +15,8 @@ class Event(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
+    entities = db.relationship("Entity",back_populates="events",cascade="all, delete")
+
 
 class EventSchema(ma.Schema):
     month = fields.String(validate=OneOf(VALID_MONTHS))

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, abort
 from setup import db, bcrypt
-from models.users import User, user_schema, UserSchema
+from models.users import User, UserSchema, user_schema
 from datetime import timedelta
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from sqlalchemy.exc import IntegrityError

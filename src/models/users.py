@@ -16,6 +16,7 @@ class User(db.Model):
     diaries = db.relationship("Diary", back_populates="user", cascade="all, delete")
     groups = db.relationship("Group",back_populates="user", cascade="all, delete")
     meetings = db.relationship("Meeting",back_populates="user",cascade="all, delete")
+    entities = db.relationship("Entity",back_populates="user",cascade="all, delete")
 
 
 class UserSchema(ma.Schema):

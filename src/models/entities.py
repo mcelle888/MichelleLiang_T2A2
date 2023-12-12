@@ -12,7 +12,10 @@ class Entity(db.Model):
     type = db.Column(db.String(), nullable = False)
     description = db.Column(db.String())
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    user = db.relationship("User",back_populates="entities",cascade="all, delete")
+    events = db.relationship("Event",back_populates="entities",cascade="all, delete")
 
 # Schema
 class EntitySchema(ma.Schema):
