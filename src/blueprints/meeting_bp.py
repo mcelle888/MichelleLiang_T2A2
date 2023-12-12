@@ -106,8 +106,8 @@ def delete_meeting(id):
         return abort(400, description= "Meeting doesn't exist")
     
     if meeting.leader_id != user.id and not user.admin:
-        return abort(401, description="Unauthorised User")
-        
+        # return abort(401, description="Unauthorised User")
+        return abort(401)
     
     db.session.delete(meeting)
     db.session.commit()

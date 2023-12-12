@@ -1,5 +1,6 @@
 from setup import db, ma
-from marshmallow.validate import Length
+from marshmallow import fields
+from marshmallow.validate import Length, And, Regexp
 
 class User(db.Model):
     __tablename__ = "users"
@@ -18,10 +19,17 @@ class User(db.Model):
 
 
 class UserSchema(ma.Schema):
+    email = fields.Email(required = True)
+    name = fields.String(required = True, validate = Length(min = 1, error = 'Name must not be empty'))
+    password = fields.String(required = True, validate = Length(min = 6, error = 'Password must have a minimum of 6 characters'))
+    phone = fields.String(required=True, validate=And(
+        Regexp('^[0-9]*$', error='Phone number must contain only numbers'),
+        Length(min = 1, error='Phone number must not be empty')
+    ))
     class Meta:
         model = User
         fields = ("email", "name", "password", "admin", "phone")  
-        password = ma.String(validate=Length(min=5, error = "Password must be at least 5 characters"))
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+

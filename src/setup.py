@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
@@ -19,10 +19,17 @@ ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-# @app.errorhandler(401)
-# def unauthorized(err):
-#     return {'error': 'Unauthorised Access'}
+
+# Error handling
+
+@app.errorhandler(401)
+def unauthorized(err):
+    return {'error': 'Unauthorised Access: You are not authorised to access this content'}
 
 @app.errorhandler(ValidationError)
 def validation_error(err):
     return {'error': err.messages}
+
+@app.errorhandler(KeyError)
+def key_error(e):
+    return jsonify({'Error': f'The field {e} is missing'}), 400
