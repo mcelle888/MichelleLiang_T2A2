@@ -17,8 +17,6 @@ def get_diary(id):
     # checks user_id
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
-    if not user:
-        return abort(401, description="Invalid user")
     
     # # selects matching diary id entry in database
     stmt = db.select(Diary).filter_by(id=id)
@@ -140,8 +138,6 @@ def delete_diary(id):
 
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
-    if not user:
-        return abort(401, description="Invalid user")
 
     # finds diary_id_id from Diary class. 
     stmt = db.select(Diary).filter_by(id=id)
@@ -158,6 +154,6 @@ def delete_diary(id):
     # else delete and commit changes   
     db.session.delete(diary)
     db.session.commit()
-    
+
     # returns JSON object of deleted meeting
     return jsonify(diary_schema.dump(diary))

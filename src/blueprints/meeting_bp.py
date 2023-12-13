@@ -52,9 +52,7 @@ def update_one_meeting(id):
     # checks user identity through User class
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
-    # if no  user is found, error
-    if not user:
-        return abort(401, description="Unauthorised User")
+
 
     # searches for given meeting_id in database
     stmt = db.select(Meeting).filter_by(id=id)
@@ -117,8 +115,6 @@ def delete_meeting(id):
    
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
-    if not user:
-        return abort(401, description="Invalid user")
 
     # finds meeting_id from Meeting class. 
     stmt = db.select(Meeting).filter_by(id=id)

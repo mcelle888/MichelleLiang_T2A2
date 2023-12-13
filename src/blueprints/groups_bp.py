@@ -71,9 +71,7 @@ def delete_group(id):
 
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
-    if not user:
-        return abort(401, description="Invalid user")
-    
+
     # finds group_id from Group class. 
     stmt = db.select(Group).filter_by(id=id)
     group = db.session.scalar(stmt)
