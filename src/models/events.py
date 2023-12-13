@@ -24,8 +24,10 @@ class Event(db.Model):
     # SQL Alchemy relationships
     entities = db.relationship("Entity",back_populates="events",cascade="all, delete")
 
-# Marshmallow Schemas for events table
+# Marshmallow Schemas for events table and validation
 class EventSchema(ma.Schema):
+    
+    # month must be a valid month
     month = fields.String(validate=OneOf(VALID_MONTHS))
 
     class Meta:

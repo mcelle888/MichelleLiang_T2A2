@@ -21,9 +21,10 @@ class Entity(db.Model):
     user = db.relationship("User",back_populates="entities",cascade="all, delete")
     events = db.relationship("Event",back_populates="entities",cascade="all, delete")
 
-# Marshmallow Schemas for entities table
+# Marshmallow Schemas for entities table and validation
 class EntitySchema(ma.Schema):
 
+    # Type must be one of either planet or star
     type = fields.String(valide = OneOf(VALID_TYPES))
     class Meta:
         fields = ("id", "name", "type", "description", "user_id")

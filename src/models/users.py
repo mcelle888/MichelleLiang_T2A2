@@ -21,11 +21,15 @@ class User(db.Model):
     meetings = db.relationship("Meeting",back_populates="user",cascade="all, delete")
     entities = db.relationship("Entity",back_populates="user",cascade="all, delete")
 
-# Marshmallow Schemas for users table
+# Marshmallow Schemas for users table with validation
 class UserSchema(ma.Schema):
     email = fields.Email(required = True)
+
+    # name must not be empty
     name = fields.String(required = True, validate = Length(min = 1, error = 'Name must not be empty'))
+    # password must be a minimum of 6 characters
     password = fields.String(required = True, validate = Length(min = 6, error = 'Password must have a minimum of 6 characters'))
+    # phone must not be empty and must only contain numbers
     phone = fields.String(required=True, validate=And(
         Regexp('^[0-9]*$', error='Phone number must contain only numbers'),
         Length(min = 1, error='Phone number must not be empty')

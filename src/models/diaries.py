@@ -1,6 +1,5 @@
 from setup import db, ma
 from marshmallow import fields
-from marshmallow.validate import Regexp
 
 # Create Diary Model (SQLAlchemy)
 class Diary(db.Model):
@@ -21,6 +20,7 @@ class Diary(db.Model):
 
 # Marshmallow Schemas for diaries table
 class DiarySchema(ma.Schema):
+    # nests user info with diary 
     user = fields.Nested('UserSchema', exclude = ['password', 'phone', 'admin'])
 
     class Meta:
