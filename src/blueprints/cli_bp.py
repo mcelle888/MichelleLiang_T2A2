@@ -9,6 +9,7 @@ from models.groups import Group
 from datetime import date
 from pandas import Timestamp
 
+# db_commands blueprint registered in app.py 
 db_commands = Blueprint('db', __name__)
 
 # To create tables
@@ -18,6 +19,7 @@ def create_db():
     db.create_all()
     print("Tables created")
 
+# To seed tables
 @db_commands.cli.command("seed")
 def seed_db():
 
@@ -200,10 +202,11 @@ def seed_db():
     db.session.add(group3)
     
 
-    # Seeding
+    # Seeding and committing changees
     db.session.commit()
     print("Table seeded")
 
+# Command to drop tables
 @db_commands.cli.command("drop")
 def drop_db():
     db.drop_all()
