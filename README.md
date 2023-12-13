@@ -3,7 +3,7 @@
 
 ### R1. Identification of the problem you are trying to solve by building this particular app.
 
-Stargazing can be an exciting and fascinating hobby to learn. However the subject of astronomy is often difficult and confusing to navigate for beginners. With this app, I hope to  provide the general public with an easy and accessible way of understanding how to traverse the night skies by readily supplying timings and locations for celestial bodies and phenomenons in simple terms and descriptions. By making stargazing more straightforward and uncomplicated, there’s a greater ease of entry to learn sciences and astronomy whilst also ultimately serving as a reminder to everyone that you only really need to look up to see some of the universe's most beautiful wonders and gifts.  
+Stargazing can be an exciting and fascinating hobby to learn. However the subject of astronomy is often difficult and confusing to navigate for beginners. With this app, I hope to  provide the general public with an easy and accessible way of understanding how to traverse the night skies by readily supplying timings and locations for celestial bodies and phenomenons in simple terms and descriptions. By making stargazing more straightforward and uncomplicated, there’s a greater ease of entry to learn sciences and astronomy whilst also ultimately serving as a reminder to everyone that you only really need to look up to see some of the universe's most beautiful wonders and gifts. :star2: 
 
 ### R2. Why is it a problem that needs solving?
 
@@ -45,6 +45,12 @@ Security Features: ORM systems have in-built security features which can prevent
 
 ### R5. Document all endpoints for your API
 
+## 1. USERS
+### 1a. /user/signup
+Method: [POST]
+Description: Allows new users to sign up to the application.
+Required body input: name, email, password, phone
+Expected response: 201 OK with name, phone, JWT token and email.
 
 ### R6. An ERD for your app 
 ![erd](docs/ERD.png)
@@ -78,6 +84,126 @@ A popular flask extension for handling JSON web tokens (JWTs). Useful for authen
 
 ### R8. Describe your project models in terms of the relationships they have with each other
 
+### A. User Model
+The user model represents all the users in the application. It has a one-to-many relationship with Diary, Group and Entity as users can make create multiple diaries, groups and entities aswell as a many-to-many relationship with meetings as many users can join many meetings. Foregin keys are established in the Diary, Group and Entity models as ```user_id``` and cascade delete is set on all relationships so that when a user is deleted, all entries connected to the user are also removed. 
+
+```py
+class User(db.Model):
+    __tablename__ = "users"
+
+    # Primary key
+    id = db.Column(db.Integer, primary_key = True)
+
+    name = db.Column(db.String(), nullable = True)
+    phone = db.Column(db.String())
+    email = db.Column(db.String(), nullable = False, unique=True)
+    password = db.Column(db.String(), nullable = False)
+    admin = db.Column(db.Boolean(), default=False)
+
+    # SQL Alchemy relationships
+    diaries = db.relationship("Diary", back_populates="user", cascade="all, delete")
+    groups = db.relationship("Group",back_populates="user", cascade="all, delete")
+    meetings = db.relationship("Meeting",back_populates="user",cascade="all, delete")
+    entities = db.relationship("Entity",back_populates="user",cascade="all, delete")
+```
+### B. Diary Model
+
+The Diary model represents each diary entry from users of the application. Diaries have a many-to-one relationship with users as each user can have multiple diaries. This link is established using the foreign key ```user_id``` from the User model.  
+```py
+class Diary(db.Model):
+    __tablename__= "diaries"
+
+    # Primary key
+    id = db.Column(db.Integer,primary_key=True)
+
+    title = db.Column(db.String())
+    description = db.Column(db.String())
+    date = db.Column(db.Date())
+
+    # Foreign key to establish relationship with users
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
+    # SQLAlchemy relatinship which nests an instance of a user model in diary
+    user = db.relationship("User", back_populates="diaries")
+```
+
+### C. Meeting Model
+The meeting model represents all the local meetings available to join. Meetings model and User model have a many-to-many relationship in that many users are able to create many meetings. Consequently, a join table (represented by the Group Model) is required. The User model is linked this model through it's foreign key ```leader_id``` which comes from the User model's ```user_id```. 
+
+```py
+class Meeting(db.Model):
+    __tablename__= "meetings"
+
+    # Primary key
+    id = db.Column(db.Integer,primary_key=True)
+
+    title = db.Column(db.String())
+    description = db.Column(db.String())
+    date = db.Column(db.Date())
+    time = db.Column(db.String())
+    location = db.Column(db.String())
+
+    # Foreign key establishes relationship with users on database level
+    leader_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    # SQL Alchemy relationships
+    groups = db.relationship("Group",back_populates="meetings",cascade="all, delete")
+    user = db.relationship("User",back_populates="meetings",cascade="all, delete")
+```
+
+### D. Groups
+```py
+class Group(db.Model):
+    __tablename__= "groups"
+
+    # Primary key
+    id = db.Column(db.Integer,primary_key=True)
+
+    # Foreign keys establishes connection to users and meetings at the database level
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    meeting_id = db.Column(db.Integer, db.ForeignKey("meetings.id"), nullable=False)
+
+    # SQL Alchemy relationships
+    user = db.relationship("User", back_populates="groups")
+    meetings = db.relationship("Meeting",back_populates="groups",cascade="all, delete")
+```
+### E. Entities
+```py
+class Entity(db.Model):
+    __tablename__= "entities"
+    
+    # Primary key
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(), nullable = False)
+    type = db.Column(db.String(), nullable = False)
+    description = db.Column(db.String())
+
+    # Foreign key establishes connection to users at database level
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    user = db.relationship("User",back_populates="entities",cascade="all, delete")
+    events = db.relationship("Event",back_populates="entities",cascade="all, delete")
+```
+
+### F. Events
+```py
+class Event(db.Model):
+    __tablename__= "events"
+
+    # Primary key
+    id = db.Column(db.Integer,primary_key=True)
+
+    name = db.Column(db.String())
+    description = db.Column(db.String())
+    month = db.Column(db.String())
+    entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
+
+    # Foreign key establishes relationship with users at database level
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
+    # SQL Alchemy relationships
+    entities = db.relationship("Entity",back_populates="events",cascade="all, delete")
+```
 
 ### R9. Discuss the database relations to be implemented in your application
 
