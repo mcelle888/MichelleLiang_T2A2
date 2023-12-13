@@ -14,6 +14,7 @@ db_commands = Blueprint('db', __name__)
 # To create tables
 @db_commands.cli.command("create")
 def create_db():
+    db.drop_all()
     db.create_all()
     print("Tables created")
 

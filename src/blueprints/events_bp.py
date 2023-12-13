@@ -57,7 +57,7 @@ def create_event():
     
 
 # Route to update a specific event (admin only)
-@events_bp.route("/<int:id>/", methods=["PUT"])
+@events_bp.route("/<int:id>/", methods=["PUT", "PATCH"])
 @jwt_required()
 def update_event(id):
     event_fields = event_schema.load(request.json)
@@ -71,7 +71,7 @@ def update_event(id):
     event.name = event_fields["name"]
     event.description = event_fields["description"]
     event.month = event_fields["month"]
-    event.event_id = event_fields["event_id"]
+    event.event_id = event.id
 
     if event:
         authorise()

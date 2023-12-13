@@ -21,7 +21,6 @@ class Event(db.Model):
 class EventSchema(ma.Schema):
     month = fields.String(validate=OneOf(VALID_MONTHS))
 
-    
     class Meta:
         fields = ("id", "name", "description", "month", "entity_id")
 

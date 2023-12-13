@@ -55,7 +55,7 @@ def create_entity():
         return {'Error': "Unauthorised Access" }
     
 # Route to update a specific entity (admin only)
-@entities_bp.route("/<int:id>/", methods=["PUT"])
+@entities_bp.route("/<int:id>/", methods=["PUT", "PATCH"])
 @jwt_required()
 def update_entity(id):
     entity_fields = entity_schema.load(request.json)
