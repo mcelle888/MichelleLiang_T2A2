@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, abort
 from setup import db
-from models.diaries import Diary, diary_schema, diaries_schema
+from models.diaries import Diary, diary_schema
 from models.users import User
 from datetime import date
 from flask_jwt_extended import jwt_required, get_jwt_identity
