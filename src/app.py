@@ -7,7 +7,7 @@ from blueprints.groups_bp import groups_bp
 from blueprints.entities_bp import entities_bp
 from blueprints.events_bp import events_bp
 
-
+# Register blueprints used in app
 app.register_blueprint(db_commands)
 app.register_blueprint(user_bp)
 app.register_blueprint(diaries_bp)

@@ -3,8 +3,7 @@ from flask_jwt_extended import get_jwt_identity
 from models.users import User
 from setup import db
 
-# Admin only
-
+# Admin only function
 def authorise(user_id=None):
     jwt_user_id = get_jwt_identity()
     stmt = db.select(User).filter_by(id=jwt_user_id)

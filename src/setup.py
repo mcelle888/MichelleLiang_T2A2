@@ -8,18 +8,18 @@ from marshmallow.exceptions import ValidationError
 
 app = Flask(__name__)
 
+# Gets keys from .flaskenv 
 app.config['JWT_SECRET_KEY'] = environ.get('JWT_KEY')
-
 app.config["SQLALCHEMY_DATABASE_URI"] = environ.get('DB_URI')
 
+
+# Inititalisng objects to be used in application
 db = SQLAlchemy(app, session_options={"expire_on_commit": False})
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-
 # Error handling
-
 @app.errorhandler(401)
 def unauthorized(err):
     return {'Error': 'Unauthorised Access'}
