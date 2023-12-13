@@ -47,8 +47,34 @@ Security Features: ORM systems have in-built security features which can prevent
 
 
 ### R6. An ERD for your app 
+![erd](docs/ERD.png)
 
 ### R7. Detail any third party services that your app will use
+
+#### Flask 
+Flask is a microweb framework used to build  python based web applications. The framework serves as a way of using methods and functions to connect with the system and handle inputs and outputs. It is particularly useful in this project as it provides an in-built development server for fast debugging, is lightweight, uses RESTful requests and supports built in unit testing. 
+
+#### PostgreSQL
+An open source relational database management system used in dynamic web applications. It supports both relational queries (SQL) and non-relational JSON queries and utilises tabular models for managing relational data. 
+
+#### SQLAlchemy 
+The chosen object relational mapper (ORM) for this project. Python classes are used and mapped to tables in databases so that queries can be processed and managed in a more convenient and simplified way. 
+
+#### Marshmallow
+ A python object relational mapping  library used to convert complex data types (e.g. objects) to and from python data types. Marshmallow schemas help in the validation of data, serialisation and deserialization of data.
+
+#### dotenv
+Used to manage environment variables by allowing you to create and add environment variables for the application to use in an .env file that is hidden and not accessible for the public. This is important as these variables can include configuration settings, database credentials, API keys and other sensitive information. 
+
+#### Bycrpt
+Is a powerful cryptographic hashing tool that is used to protect sensitive data (such as passwords) from unauthorised access.The algorithm involves hashing and salting passwords to resist brute force attacks.
+
+#### Psycopg2
+The most commonly used PostgreSQL adapter used in python. Adapters serve as a bridging tool to connect databases to  web application and program languages which enables a direct way to interact with the database from your application.
+
+#### Flask JWT Extended:
+A popular flask extension for handling JSON web tokens (JWTs). Useful for authentication and authorization in web applications and provides a safe and secure way of transmitting data via protected routes. 
+
 
 ### R8. Describe your project models in terms of the relationships they have with each other
 
