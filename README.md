@@ -392,7 +392,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 
 ## R6. An ERD for your app 
-![erd](docs/ERD.png)
+![erd](docs/erd.png)
 
 ## R7. Detail any third party services that your app will use
 
@@ -443,7 +443,6 @@ class User(db.Model):
     diaries = db.relationship("Diary", back_populates="user", cascade="all, delete")
     groups = db.relationship("Group",back_populates="user", cascade="all, delete")
     meetings = db.relationship("Meeting",back_populates="user",cascade="all, delete")
-    entities = db.relationship("Entity",back_populates="user",cascade="all, delete")
 ```
 ### B. Diary Model<!-- omit from toc -->
 
@@ -491,6 +490,8 @@ class Meeting(db.Model):
 ```
 
 ### D. Groups<!-- omit from toc -->
+
+The Group model connects the User and Meeting models together by representing each user and any meetings they are a part of. It is comprised of two foreign keys, ```user id``` and ```meeting_id``` from the User and Meeting models respectively. In the meeting relationship, cascade all delete is defined so that when a user removes themselves from a group, they are also removed from the meeting model. 
 ```py
 class Group(db.Model):
     __tablename__= "groups"
@@ -507,24 +508,24 @@ class Group(db.Model):
     meetings = db.relationship("Meeting",back_populates="groups",cascade="all, delete")
 ```
 ### E. Entities<!-- omit from toc -->
+The Entity model represents celestial objects that can be viewed in the application. It has a one-to-many relationship with events in that an entity can be associated with many events. This is represented using the foreign key in the Events model. 
 ```py
 class Entity(db.Model):
     __tablename__= "entities"
     
     # Primary key
     id = db.Column(db.Integer,primary_key=True)
+
     name = db.Column(db.String(), nullable = False)
     type = db.Column(db.String(), nullable = False)
     description = db.Column(db.String())
 
-    # Foreign key establishes connection to users at database level
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-
-    user = db.relationship("User",back_populates="entities",cascade="all, delete")
+    # SQL Alchemy relationships
     events = db.relationship("Event",back_populates="entities",cascade="all, delete")
 ```
 
 ### F. Events<!-- omit from toc -->
+The Events model represents a collection of celestial events viewable to users. It has a many-to-one relationship with entities as each event has one entity associated with it but entities can have many different events. These models are linked using the foreign key ```entity_id``` below.  
 ```py
 class Event(db.Model):
     __tablename__= "events"
@@ -535,10 +536,9 @@ class Event(db.Model):
     name = db.Column(db.String())
     description = db.Column(db.String())
     month = db.Column(db.String())
-    entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
 
     # Foreign key establishes relationship with users at database level
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
 
     # SQL Alchemy relationships
     entities = db.relationship("Entity",back_populates="events",cascade="all, delete")
@@ -573,6 +573,16 @@ Meetups and events have a **one-to-one relationship** as each meetup can revolve
 
 
 ## R10. Describe the way tasks are allocated and tracked in your project
+
+There were two major parts to the project: the planning/documentation phase and the coding phase. I seperated the two and began with the planning and documentation phase. Trello was used to further divide and track time management in the project. I started creating tasks for the planning and documentation phase and would update progress at the end of each day. Once I was done, I moved onto the coding phase and the process started again. Task cards were created in Trello with a priority tag (low, medium, high) to help efficiently order tasks. Due dates were also attatched to each card to ensure time management. Updates were performed by moving cards to their respective positions (To do, Doing or Done) and ticking off checklists within the cards themselves. 
+
+Class discord standups was another effective tool used in project management. Daily communication with my peers provided some accountability and motivation to work as efficiently as I could. The daily summaries provided a platform to communicate more reflective thoughts on what I had difficulties with and new things I had learnt on the day.
+
+[Link to Trello board](https://trello.com/b/agINW4tj/api-project)
+
+#### Trello Screenshots <!-- omit from toc -->
+
+#### Standup Screenshots <!-- omit from toc -->
 
 
 ## Reference List
