@@ -74,6 +74,8 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Expected response</u>: 201 OK with name, phone, JWT token and email.
 
+![1a](docs/1a.png)
+
 ### 1b. /user/signin/<!-- omit from toc -->
 <u>Method</u>: [POST]
 
@@ -85,6 +87,8 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Validation/Authorisation</u>: An error message is returned if email and password does not match
 
+![1b](docs/1b.png)
+
 ### 1c./user/<!-- omit from toc -->
 <u>Method</u>: [DELETE]
 
@@ -95,6 +99,8 @@ Security Features: ORM systems have in-built security features which can prevent
 <u>Expected response</u>: 200 OK with the users email and a JWT token
 
 <u>Validation/Authorisation</u>: An error message appears if you are not an admin or there is no user entry 
+
+![1c](docs/1c.png)
 
 ### DIARIES
 
@@ -110,6 +116,8 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Validation/Authorisation</u>: An error message appears if you try to access another users’ diary or the diary does not exist
 
+![2a](docs/2a.png)
+
 ### 2b. /diaries/users/<int: id>/<!-- omit from toc -->
 <u>Method</u>: [GET]
 
@@ -121,6 +129,8 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Validation/Authorisation</u>: An error message appears if you try to access another users’ diary or the diary does not exist
 
+![2b](docs/2b.png)
+
 ### 2c. /diaries/<!-- omit from toc -->
 <u>Method</u>: [POST]
 
@@ -131,6 +141,8 @@ Security Features: ORM systems have in-built security features which can prevent
 <u>Expected response</u>: 200 OK with the new entry including title, description, post id, date and users info (email and name)
 
 <u>Validation/Authorisation</u>: An error message appears if you leave a field missing
+
+![2c](docs/2a.png)![2c](docs/2a.png)
 
 ### 2d. /diaries/<int: id>/<!-- omit from toc -->
 <u>Method</u>: [PUT, PATCH]
@@ -144,6 +156,7 @@ Security Features: ORM systems have in-built security features which can prevent
 <u>Validation/Authorisation</u>: An error message appears if you leave a field 
 missing or if you try to edit an entry that does not belong to you.
 
+![2d](docs/2d.png)
 
 ### 2e. /diaries/<int: id>/<!-- omit from toc -->
 <u>Method</u>: [DELETE]
@@ -155,6 +168,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>: 200 OK the details of the deleted entry
 
 <u>Validation/Authorisation</u>: An error message appears if no entry exists or you are not the owner or admin.
+
+![2e](docs/2e.png)
 
 ### MEETINGS
 
@@ -169,6 +184,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: An error message appears you are not logged in
 
+![3a](docs/3a.png)
+
 ### 3b. /meetings/<int: id>/<!-- omit from toc -->
 <u>Method</u>: [GET]
 
@@ -179,6 +196,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>: 200 OK meeting details of one specific meeting.
 
 <u>Validation/Authorisation</u>: An error message appears you are not logged in or if the meeting id does not exist.
+
+![3b](docs/3b.png)
 
 ### 3c. /meetings/<int: id>/<!-- omit from toc -->
 
@@ -192,6 +211,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: An error occurs when you try to edit a meeting you are not the leader of(did not create). Error also when date is not entered correctly. 
 
+![3c](docs/3c.png)
+
 ### 3d. /meetings/<!-- omit from toc -->
 <u>Method</u>: [POST]
 
@@ -202,6 +223,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>: 200 OK with new meeting details
 
 <u>Validation/Authorisation</u>: Error when you are not logged in, when fields are missing or when date is not entered correctly. 
+
+![3d](docs/3d.png)
 
 ### 3e. /meetings/<!-- omit from toc -->
 
@@ -215,6 +238,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: An error occurs when the entry is not found or you are not the leader/admin.
 
+![3e](docs/3e.png)
 
 ### GROUPS
 
@@ -229,6 +253,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: Error when no authentication bearer
 
+![4a](docs/4a.png)
+
 ### 4b. /groups/<int: id>/<!-- omit from toc -->
 <u>Method</u>: [GET]
 
@@ -239,6 +265,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>: 200 OK with listing of members
 
 <u>Validation/Authorisation</u>: Error when group does not exist
+
+![4b](docs/4b.png)
 
 ### 4c. /groups/<!-- omit from toc -->
 
@@ -252,6 +280,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: Error when no authentication bearer
 
+![4c](docs/4c.png)
+
 ### 4d. /groups/<int: id>/<!-- omit from toc -->
 
 <u>Method</u>: [DELETE] 
@@ -263,6 +293,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>: 200 OK with the users details nested in the meeting number
 
 <u>Validation/Authorisation</u>: Error when no entry exists
+
+![4d](docs/4d.png)
 
 ### ENTITIES
 ### 5a. /entities/<!-- omit from toc -->
@@ -277,6 +309,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: Error when no authentication bearer
 
+![5a](docs/5a.png)
+
 ### 5b. /entities/search/<!-- omit from toc -->
 
 <u>Method</u>: [GET]
@@ -289,6 +323,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: Error when no authentication bearer
 
+![5b](docs/5b.png)
+
 ### 5c. /entities/<!-- omit from toc -->
 
 <u>Method</u>: [POST]
@@ -300,6 +336,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: Error when missing field or when type is not one of planet or star
 
+![5c](docs/5c.png)
 
 ### 5d. /entities/<int: d>/<!-- omit from toc -->
 
@@ -313,6 +350,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>: Error when type is not one of planet or star or when entity does not exist. 
 
+![5d](docs/5d.png)
 
 ### 5e. /entities/<int: id>/<!-- omit from toc -->
 
@@ -325,6 +363,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>: 200 OK with details of deleted entities
 
 <u>Validation/Authorisation</u>: Error when entity does not exist. 
+
+![5e](docs/5e.png)
 
 ### EVENTS
 ### 6a. /events/<!-- omit from toc -->
@@ -339,6 +379,8 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>:: Error when no authentication bearer
 
+![6a](docs/6a.png)
+
 ### 6b. /events/search/<!-- omit from toc -->
 
 <u>Method</u>:: [GET]
@@ -350,6 +392,8 @@ missing or if you try to edit an entry that does not belong to you.
 <u>Expected response</u>:: 200 OK with a list of all the events for a particular month
 
 <u>Validation/Authorisation</u>:: Error when no authentication bearer
+
+![6b](docs/6b.png)
 
 ### 6c. /events/<!-- omit from toc -->
 
@@ -363,6 +407,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>:: Error when missing field or when month is not valid or missing field
 
+![6c](docs/6c.png)
 
 ### 6d. /events/<int: id>/<!-- omit from toc -->
 
@@ -376,6 +421,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>:: Error when month is invalid or when event does not exist.
 
+![6d](docs/6d.png)
 
 ### 6e. /entities/<int: id>/<!-- omit from toc -->
 
@@ -389,7 +435,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Validation/Authorisation</u>:: Error when event does not exist. 
 
-
+![6e](docs/6e.png)
 
 ## R6. An ERD for your app 
 ![erd](docs/erd.png)
@@ -582,8 +628,42 @@ Class discord standups was another effective tool used in project management. Da
 
 #### Trello Screenshots <!-- omit from toc -->
 
+Day 1
+![day1](docs/day1.png)
+
+Day 2
+![day2](docs/day2.PNG)
+
+Day 3
+![day2](docs/day3.PNG)
+
+Day 4
+![day4](docs/day4.png)
+
+Day 5
+![day5](docs/day5.png)
+
+Day 6
+![day6](docs/day6.png)
+
+Day 7
+![day7](docs/day7.png)
+
+Day 8
+![day8](docs/day8.png)
+
+Day 9
+![day9](docs/day9.png)
+
+Day 10
+![day10](docs/day10.png)
+
 #### Standup Screenshots <!-- omit from toc -->
 
+![standup](docs/sp4.png)
+![standup](docs/sp3.png)
+![standup](docs/sp2.png)
+![standup](docs/sp1.png)
 
 ## Reference List
 
