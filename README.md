@@ -20,6 +20,13 @@
 - [R10. Describe the way tasks are allocated and tracked in your project](#r10-describe-the-way-tasks-are-allocated-and-tracked-in-your-project)
 - [Reference List](#reference-list)
 
+
+
+
+
+[Link to Github Repo](https://github.com/mcelle888/MichelleLiang_T2A2)
+
+
 ## R1. Identification of the problem you are trying to solve by building this particular app.
 
 Stargazing can be an exciting and fascinating hobby to learn. However the subject of astronomy is often difficult and confusing to navigate for beginners. With this app, I hope to  provide the general public with an easy and accessible way of understanding how to traverse the night skies by readily supplying timings and locations for celestial bodies and phenomenons in simple terms and descriptions. By making stargazing more straightforward and uncomplicated, there’s a greater ease of entry to learn sciences and astronomy whilst also ultimately serving as a reminder to everyone that you only really need to look up to see some of the universe's most beautiful wonders and gifts :star2: 
