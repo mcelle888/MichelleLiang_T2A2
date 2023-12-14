@@ -85,7 +85,7 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Expected response</u>: 200 OK with the users email and a JWT token
 
-<u>Validation/Authorisation</u>: An error message is returned if email and password does not match
+<u>Validation/Authorisation</u>: An error message is returned if email and password does not match. 
 
 ![1b](docs/1b.png)
 
@@ -98,7 +98,7 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Expected response</u>: 200 OK with the users email and a JWT token
 
-<u>Validation/Authorisation</u>: An error message appears if you are not an admin or there is no user entry 
+<u>Validation/Authorisation</u>: An error message appears if you are not an admin or there is no user entry.
 
 ![1c](docs/1c.png)
 
@@ -114,7 +114,7 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Expected response</u>: 200 OK with diary entry and user information (email and name)
 
-<u>Validation/Authorisation</u>: An error message appears if you try to access another users’ diary or the diary does not exist
+<u>Validation/Authorisation</u>: An error message appears if you try to access another users’ diary or the diary does not exist. Error when no authentication bearer (JWT token)
 
 ![2a](docs/2a.png)
 
@@ -127,7 +127,7 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Expected response</u>: 200 OK with all diary entries belonging to the user
 
-<u>Validation/Authorisation</u>: An error message appears if you try to access another users’ diary or the diary does not exist
+<u>Validation/Authorisation</u>: An error message appears if you try to access another users’ diary or the diary does not exist. Error when no authentication bearer (JWT token)
 
 ![2b](docs/2b.png)
 
@@ -140,7 +140,7 @@ Security Features: ORM systems have in-built security features which can prevent
 
 <u>Expected response</u>: 200 OK with the new entry including title, description, post id, date and users info (email and name)
 
-<u>Validation/Authorisation</u>: An error message appears if you leave a field missing
+<u>Validation/Authorisation</u>: An error message appears if you leave a field missing. Error when no authentication bearer (JWT token)
 
 ![2c](docs/2a.png)![2c](docs/2a.png)
 
@@ -154,7 +154,7 @@ Security Features: ORM systems have in-built security features which can prevent
 <u>Expected response</u>: 200 OK with the updated entry including title, description, post id, date and users info (email and name)
 
 <u>Validation/Authorisation</u>: An error message appears if you leave a field 
-missing or if you try to edit an entry that does not belong to you.
+missing or if you try to edit an entry that does not belong to you. Error when no authentication bearer (JWT token)
 
 ![2d](docs/2d.png)
 
@@ -167,7 +167,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK the details of the deleted entry
 
-<u>Validation/Authorisation</u>: An error message appears if no entry exists or you are not the owner or admin.
+<u>Validation/Authorisation</u>: An error message appears if no entry exists or you are not the owner or admin. Error when no authentication bearer (JWT token)
 
 ![2e](docs/2e.png)
 
@@ -182,7 +182,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with a list of all meetings
 
-<u>Validation/Authorisation</u>: An error message appears you are not logged in
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token)
 
 ![3a](docs/3a.png)
 
@@ -195,7 +195,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK meeting details of one specific meeting.
 
-<u>Validation/Authorisation</u>: An error message appears you are not logged in or if the meeting id does not exist.
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token) and if the meeting id does not exist.
 
 ![3b](docs/3b.png)
 
@@ -209,7 +209,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with updated meeting details 
 
-<u>Validation/Authorisation</u>: An error occurs when you try to edit a meeting you are not the leader of(did not create). Error also when date is not entered correctly. 
+<u>Validation/Authorisation</u>: An error occurs when you try to edit a meeting you are not the leader of(did not create). Error also when date is not entered correctly. Error when no authentication bearer (JWT token)
 
 ![3c](docs/3c.png)
 
@@ -222,7 +222,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with new meeting details
 
-<u>Validation/Authorisation</u>: Error when you are not logged in, when fields are missing or when date is not entered correctly. 
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token) and when fields are missing or when date is not entered correctly. 
 
 ![3d](docs/3d.png)
 
@@ -251,7 +251,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with listing
 
-<u>Validation/Authorisation</u>: Error when no authentication bearer
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token)
 
 ![4a](docs/4a.png)
 
@@ -264,7 +264,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with listing of members
 
-<u>Validation/Authorisation</u>: Error when group does not exist
+<u>Validation/Authorisation</u>: Error when group does not exist. Error when no authentication bearer (JWT token)
 
 ![4b](docs/4b.png)
 
@@ -278,7 +278,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with the users details nested in the meeting number
 
-<u>Validation/Authorisation</u>: Error when no authentication bearer
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token)
 
 ![4c](docs/4c.png)
 
@@ -292,7 +292,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with the users details nested in the meeting number
 
-<u>Validation/Authorisation</u>: Error when no entry exists
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token) and error when no entry exists
 
 ![4d](docs/4d.png)
 
@@ -307,7 +307,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with a list of all the entities
 
-<u>Validation/Authorisation</u>: Error when no authentication bearer
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token)
 
 ![5a](docs/5a.png)
 
@@ -321,20 +321,21 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with a list of all the entities
 
-<u>Validation/Authorisation</u>: Error when no authentication bearer
+<u>Validation/Authorisation</u>: Error when no authentication bearer (JWT token)
 
 ![5b](docs/5b.png)
 
 ### 5c. /entities/<!-- omit from toc -->
 
 <u>Method</u>: [POST]
+
 <u>Description</u>: Allows admins to post new entities
 
 <u>Required body input</u>: name, description, type
 
 <u>Expected response</u>: 200 OK with details of new entities
 
-<u>Validation/Authorisation</u>: Error when missing field or when type is not one of planet or star
+<u>Validation/Authorisation</u>: Error when missing field or when type is not one of planet or star. Error when no authentication bearer (JWT token)
 
 ![5c](docs/5c.png)
 
@@ -348,7 +349,7 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with details of new entity
 
-<u>Validation/Authorisation</u>: Error when type is not one of planet or star or when entity does not exist. 
+<u>Validation/Authorisation</u>: Error when type is not one of planet or star or when entity does not exist. Error when no authentication bearer (JWT token)
 
 ![5d](docs/5d.png)
 
@@ -362,78 +363,78 @@ missing or if you try to edit an entry that does not belong to you.
 
 <u>Expected response</u>: 200 OK with details of deleted entities
 
-<u>Validation/Authorisation</u>: Error when entity does not exist. 
+<u>Validation/Authorisation</u>: Error when entity does not exist. Error when no authentication bearer (JWT token)
 
 ![5e](docs/5e.png)
 
 ### EVENTS
 ### 6a. /events/<!-- omit from toc -->
 
-<u>Method</u>:: [GET]
+<u>Method</u>: [GET]
 
-<u>Description</u>:: Allows users to get a list of all the events
+<u>Description</u>: Allows users to get a list of all the events
 
-<u>Required body input</u>:: n/a
+<u>Required body input</u>: n/a
 
-<u>Expected response</u>:: 200 OK with a list of all the events
+<u>Expected response</u>: 200 OK with a list of all the events
 
-<u>Validation/Authorisation</u>:: Error when no authentication bearer
+<u>Validation/Authorisation</u>:: Error when no authentication bearer (JWT token)
 
 ![6a](docs/6a.png)
 
 ### 6b. /events/search/<!-- omit from toc -->
 
-<u>Method</u>:: [GET]
+<u>Method</u>: [GET]
 
-<u>Description</u>:: Allows users to filter entities by month
+<u>Description</u>: Allows users to filter entities by month
 
-<u>Required body input</u>:: n/a
+<u>Required body input</u>: n/a
 
 <u>Expected response</u>:: 200 OK with a list of all the events for a particular month
 
-<u>Validation/Authorisation</u>:: Error when no authentication bearer
+<u>Validation/Authorisation</u>:: Error when no authentication bearer (JWT token)
 
 ![6b](docs/6b.png)
 
 ### 6c. /events/<!-- omit from toc -->
 
-<u>Method</u>:: [POST]
+<u>Method</u>: [POST]
 
-<u>Description</u>:: Allows admins to post new events
+<u>Description</u>: Allows admins to post new events
 
-<u>Required body input</u>:: name, description, month, entity_id
+<u>Required body input</u>: name, description, month, entity_id
 
-<u>Expected response</u>:: 200 OK with details of new event
+<u>Expected response</u>: 200 OK with details of new event
 
-<u>Validation/Authorisation</u>:: Error when missing field or when month is not valid or missing field
+<u>Validation/Authorisation</u>: Error when missing field or when month is not valid or missing field. Error when no authentication bearer (JWT token)
 
 ![6c](docs/6c.png)
 
 ### 6d. /events/<int: id>/<!-- omit from toc -->
 
-<u>Method</u>:: [PUT, PATCH]
+<u>Method</u>: [PUT, PATCH]
 
-<u>Description</u>:: Allows admins to edit existing entities
+<u>Description</u>: Allows admins to edit existing entities
 
-<u>Required body input</u>:: name, description, month, event_id
+<u>Required body input</u>: name, description, month, event_id
 
-<u>Expected response</u>:: 200 OK with details of new event
+<u>Expected response</u>: 200 OK with details of new event
 
-<u>Validation/Authorisation</u>:: Error when month is invalid or when event does not exist.
+<u>Validation/Authorisation</u>: Error when month is invalid or when event does not exist. Error when no authentication bearer (JWT token)
 
 ![6d](docs/6d.png)
 
 ### 6e. /entities/<int: id>/<!-- omit from toc -->
 
-<u>Method</u>:: [DELETE]
+<u>Method</u>: [DELETE]
 
-<u>Description</u>:: Allows admins to delete existing entities
+<u>Description</u>: Allows admins to delete existing entities
 
-<u>Required body input</u>:: n/a
+<u>Required body input</u>: n/a
 
-<u>Expected response</u>:: 200 OK with details of deleted event
+<u>Expected response</u>: 200 OK with details of deleted event
 
-<u>Validation/Authorisation</u>:: Error when event does not exist. 
+<u>Validation/Authorisation</u>: Error when event does not exist. Error if user is not admin. Error when no authentication bearer (JWT token)
 
 ![6e](docs/6e.png)
 
