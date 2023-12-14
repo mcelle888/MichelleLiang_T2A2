@@ -52,7 +52,6 @@ def create_entity():
     new_entity.name = entity_fields["name"]
     new_entity.description = entity_fields["description"]
     new_entity.type = entity_fields["type"]
-    new_entity.user_id = user_id
 
     # checks if user is admin. if not return error
     if new_entity:

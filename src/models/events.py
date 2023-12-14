@@ -16,10 +16,9 @@ class Event(db.Model):
     name = db.Column(db.String())
     description = db.Column(db.String())
     month = db.Column(db.String())
-    entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
-
+    
     # Foreign key establishes relationship with users at database level
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    entity_id = db.Column(db.Integer, db.ForeignKey("entities.id"))
 
     # SQL Alchemy relationships
     entities = db.relationship("Entity",back_populates="events",cascade="all, delete")

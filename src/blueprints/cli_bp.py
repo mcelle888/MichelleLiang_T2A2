@@ -62,6 +62,7 @@ def seed_db():
     db.session.add(user3)
 
 
+
     db.session.commit()
 
     # Creating diary entries for seeding
@@ -118,32 +119,28 @@ def seed_db():
     entity1 = Entity(
         name = "Mercury",
         description = "Closest planet to the sun and only slightly bigger than our moon. The planet is covered in impact craters. Temperatures are extremely hot during the day due to is proximity to the Sun but also extremely cold at night due to the lack of atmosphere.",
-        type = "planet",
-        user_id = user0.id
+        type = "planet"
     )
     db.session.add(entity1)
 
     entity2 = Entity (
         name = "Venus",
         description = "Second planet from the sun and named after the goddess of love, venus is the hottest planet in our solar system due to it's close proximity to Earth and its thick atmosphere made up of CO2 and greenhouse gases. It features a rocky terrain with volcanoes and is often referred to as Earth's sister due to it's similar size.",
-        type = "planet",
-        user_id = user0.id
+        type = "planet"
     )
     db.session.add(entity2)
 
     entity3 = Entity (
         name = "Mars",
         description = "Fourth planet from the sun with a rocky terrain and half the size of Earth. Mars is has a thin atmosphere however the surface of the planet is rather inactive and covered in rust which gives the planet its famous red tinge.",
-        type = "planet",
-        user_id = user0.id
+        type = "planet"
     )
     db.session.add(entity3)
 
     entity4 = Entity (
         name = "Jupitar",
         description = "The largest planet in our solar system and covered in stripes and spots (active storms!). The most famous spot, called the red spot is located towards the bottom of the planet. Jupitar is a gas giant with rings (difficult to see unfortunately) and a heavy atmosphere",
-        type = "planet",
-        user_id = user0.id
+        type = "planet"
     )
     db.session.add(entity4)
 
@@ -151,7 +148,6 @@ def seed_db():
         name = "Betelgeuse",
         description = "A red super giant star (764 times bigger than our sun!) in the shoulder of constellation Orion. One of the brightest stars viewable with the naked eye.",
         type = "star",
-        user_id = user0.id
     )
     db.session.add(entity5)
 
@@ -159,7 +155,6 @@ def seed_db():
     name = "Sirius",
     description = "Greek for glowing or scorching, 'sirius' is the name of the brightest star in our skies. It is a binary star with Sirus A being the star we can see from Earth and its companion, Sirius B, 2000x less dimmer and therefore invisible to the unaided eye.",
     type = "star",
-        user_id = user0.id
     )
     db.session.add(entity5)
 
@@ -168,8 +163,7 @@ def seed_db():
         name = "Mercury",
         description = "Viewable towards the Eastern horizon, in the early hours of dawn, an hour before the sun rises on the horizon. Greatest elongation will occur on the 13th where it will rise 90 minutes before the sun ",
         month = "January",
-        entity_id = 1,
-        user_id = user0.id 
+        entity_id = 1
     )
     db.session.add(event1)
 
@@ -179,7 +173,6 @@ def seed_db():
         description = "April will be the brightest month to see this star",
         month = "April",
         entity_id = 5,
-        user_id = user0.id
     )
     db.session.add(event2)
 

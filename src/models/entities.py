@@ -15,10 +15,7 @@ class Entity(db.Model):
     type = db.Column(db.String(), nullable = False)
     description = db.Column(db.String())
 
-    # Foreign key establishes connection to users at database level
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-
-    user = db.relationship("User",back_populates="entities",cascade="all, delete")
+    # SQL Alchemy relationships
     events = db.relationship("Event",back_populates="entities",cascade="all, delete")
 
 # Marshmallow Schemas for entities table and validation
@@ -27,7 +24,7 @@ class EntitySchema(ma.Schema):
     # Type must be one of either planet or star
     type = fields.String(valide = OneOf(VALID_TYPES))
     class Meta:
-        fields = ("id", "name", "type", "description", "user_id")
+        fields = ("id", "name", "type", "description")
 
 entity_schema = EntitySchema()
 entities_schema = EntitySchema(many=True)
